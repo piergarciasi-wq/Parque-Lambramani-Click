@@ -1,0 +1,115 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PL Clicker</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: white;
+    font-family: Arial, sans-serif;
+    user-select: none;
+  }
+  #logo {
+    width: 230px;
+    height: 230px;
+    cursor: pointer;
+    transition: transform 0.08s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  #logo:active {
+    transform: scale(0.92);
+  }
+  #contador {
+    margin-top: 28px;
+    font-size: 48px;
+    font-weight: bold;
+    color: #222;
+  }
+  #texto {
+    margin-top: 8px;
+    font-size: 18px;
+    color: #666;
+  }
+  button {
+    margin-top: 22px;
+    padding: 10px 22px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    background: white;
+    font-size: 16px;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+<!-- Círculo del logo de Parque Lambramani -->
+<svg id="logo" viewBox="0 0 200 200"
+     role="button" tabindex="0"
+     aria-label="Pulsar el logo para sumar clics">
+  <circle cx="100" cy="100" r="94"
+          fill="white" stroke="#eeeeee" stroke-width="3"/>
+  <!-- Arco azul -->
+  <path d="M 12 96 A 88 88 0 0 1 188 96
+           L 151 96 A 51 51 0 0 0 49 96 Z"
+        fill="#0755A5" stroke="white" stroke-width="3"/>
+  <!-- Centro rojo -->
+  <path d="M 48 103
+           A 52 52 0 0 1 152 103
+           L 119 177 L 81 177 Z"
+        fill="#E32920" stroke="white" stroke-width="3"
+        stroke-linejoin="round"/>
+  <!-- Hoja izquierda -->
+  <path d="M 12 101
+           C 48 99 79 123 82 158
+           L 82 178
+           C 45 171 19 144 12 101 Z"
+        fill="#45A52E" stroke="white" stroke-width="4"/>
+  <!-- Hoja derecha -->
+  <path d="M 188 101
+           C 152 99 121 123 118 158
+           L 118 178
+           C 155 171 181 144 188 101 Z"
+        fill="#45A52E" stroke="white" stroke-width="4"/>
+</svg>
+
+<div id="contador">0</div>
+<div id="texto">clics en el logo de PL</div>
+<button id="reiniciar">Reiniciar contador</button>
+
+<script>
+  let clics = 0;
+  const logo = document.getElementById("logo");
+  const contador = document.getElementById("contador");
+
+  function sumarClic() {
+    clics++;
+    contador.textContent = clics.toLocaleString("es-PE");
+  }
+
+  logo.addEventListener("click", sumarClic);
+
+  logo.addEventListener("keydown", function(e) {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      sumarClic();
+    }
+  });
+
+  document.getElementById("reiniciar").addEventListener("click", () => {
+    clics = 0;
+    contador.textContent = "0";
+  });
+</script>
+
+</body>
+</html>
